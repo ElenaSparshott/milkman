@@ -25,17 +25,19 @@ app.get("/order/:customer_name", (req,res) => {
         dbquery,
         (err, dbresult) => {
 
-        // let orders2 = dbresult.rows.map(row => {
-        //     product: row.product,
-        //     quantity: row.quantity
-        // })
-        let orders = []
-        for(let row of dbresult.rows) {
-            orders.push({
+        let orders = dbresult.rows.map(row => {
+            return {
                 product: row.product,
                 quantity: row.quantity
-            })
-        }
+            }
+        })
+        // let orders = []
+        // for(let row of dbresult.rows) {
+        //     orders.push({
+        //         product: row.product,
+        //         quantity: row.quantity
+        //     })
+        // }
 
         res.json(orders)
           
